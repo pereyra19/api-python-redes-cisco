@@ -37,9 +37,22 @@ Tal como se ve en la figura seleccionamos Python 3.10.12 (cisco) que se mostrar�
 
 Simplemente escribimos en la línea de comandos: **deactivate**
 
+## TP4 – Integrador (Redes de Computadoras 3643)
+
+Scripts suministrados por la cátedra (usan la API REST del Network Controller de Packet Tracer):
+- `01_get-ticket.py`: pide un ticket de sesión (POST /ticket) con el usuario del controlador.
+- `02_get-network-device.py`: lista los equipos de red que ve el controlador (GET /network-device). Modificado para no fallar con el ISP, que no está administrado y no tiene hostname.
+- `03_get-host.py`: lista los hosts descubiertos (GET /host).
+- `04_tabulate.py`: pide el ticket por sí solo y muestra los equipos en una tabla. Modificado igual que el 02.
+
+Script propio:
+- `05_inventario_csv.py`: pide el ticket, consulta los equipos y los hosts del controlador y exporta el inventario completo a `inventario.csv`.
+
+Uso: con el entorno virtual activo y Packet Tracer abierto con la API del controlador habilitada, ejecutar `python src/05_inventario_csv.py`.
 
 
 ## Antes de ejecutar los scripts
 
 - **Credenciales del controlador:** los scripts usan el usuario `cisco` y la clave `cisco123!`. Si en tu Network Controller creaste otro usuario, cambialos en `01_get-ticket.py` y en `04_tabulate.py`.
 - **Ticket (X-Auth-Token):** `02_get-network-device.py` y `03_get-host.py` traen escrito un ticket de ejemplo que **no va a funcionar** en tu Packet Tracer, porque el controlador genera uno nuevo en cada sesión y vence. Ejecutá primero `01_get-ticket.py`, copiá el ticket que muestra y reemplazalo en el header `X-Auth-Token` de esos dos scripts. `04_tabulate.py` no necesita este paso: pide el ticket solo.
+
